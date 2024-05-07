@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ name }}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <style>
+            body {background-color: skyblue;}
+
+            .center-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+            }
+
+            .card {
+                width: 100%; /* Make the card width 100% for responsiveness */
+                max-width: 400px; /* Set a maximum width for larger screens */
+            }
+
+            /* Adjust card size for small screens (mobile devices) */
+            @media (max-width: 320px) {
+                .card {
+                    max-width: 80%; /* Set a larger percentage for small screens */
+                    height: 75vh;
+                }
+            }
+            .linksBtn{text-decoration: none;}
+            .mb-10{margin-bottom: 10px;}
+            .mt-20{margin-top: 20px !important;}
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid mt-20">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                  <!-- <a class="navbar-brand" href="#">Home</a> -->
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="http://127.0.0.1:8000/lcommerce/hello/">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Fashion</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          User
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="http://127.0.0.1:8000/lcommerce/login/">Login</a></li>
+                          <li><a class="dropdown-item" href="login">Forgot Password</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="container center-container">
+            <div class="card">
+                <div class="card-body">
+                    {% if statusCode == 'Error' %}
+                        <div class="alert alert-danger" role="alert">
+                            {{msg}}
+                        </div>
+                    {% endif %}
+                    <form name="LoginForm" class="v_form" id="loginForm">
+                        {% csrf_token %}
+                        <div class="mb-5 text-center">
+                            <h3 class="card-header">
+                                Login
+                            </h3>
+                        </div>
+                        <div class="mb-3">
+                            <input placeholder="Please Enter Your User Name*" name="username" type="email" class="form-control" id="validationCustom01" aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="mb-3">
+                            <input placeholder="Please Enter Your Password*" name="userPass" type="password" class="form-control" id="validationCustom02">
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-4">
+
+          <!-- <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Open first modal</button> -->
+                                <a href="#exampleModalToggle" class="linksBtn"  data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Sign Up</a>
+                            </div>
+                            <div class="col-3"></div>
+                            <div class="col-5">
+                                <a href="forgotPassword" class="linksBtn">Forgot Password?</a>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Sign Up</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form name="signUpform" id="signUp">
+                        <div class="mb-3">
+                            <input type="text" name="userName" placeholder="Enter Your Name*" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" name="Email" placeholder="Enter Your Email Address*" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <input type="tel" name="userPame" placeholder="Enter Your Phone Number*" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="submit" id="ajax-button" class="btn btn-primary" value="Submit">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <!-- <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button> -->
+                </div>
+              </div>
+            </div>
+        </div>
+          
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-QlJifXLdKLC5BI3ki98ZEhqVRSx7gro8KOjN3b3zg9r+GxqHS3KX6uNqE2zn8yQ" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-QlJifXLdKLC5BI3ki98ZEhqVRSx7gro8KOjN3b3zg9r+GxqHS3KX6uNqE2zn8yQ" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function () {
+                $('#ajax-button').click(function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'http://127.0.0.1:8003/lcommerce/signUp/',
+                        data: {
+                            // your data to be sent
+                            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),  // Include CSRF token
+                            formData:new FormData($('#signUp')[0]),
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data.message);
+                            // Handle the response data as needed
+                        },
+                        error: function (error) {
+                            console.error('AJAX request failed:', error);
+                        }
+                    });
+                });
+            });
+        </script>
+        
+    </body>
+</html>

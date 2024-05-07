@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{name}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+      .mb-30{margin-bottom: 30px;}
+      .error {
+          border: 2px solid #f00;
+      }
+      .valid {
+          border: 2px solid #0ff;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="mb-30 mt-3">
+          <marquee>
+              <h1 style="font-style: italic;">Welcome to {{name}}., Happy Shopping., Thank You...</h1>
+          </marquee>
+      </div>
+
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <!-- <a class="navbar-brand" href="#">Home</a> -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="http://127.0.0.1:8000/lcommerce/hello/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Fashion</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  User
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#loginModel" class="dropdown-item"  data-bs-target="#loginModalToggle" data-bs-toggle="modal">Login</a></li>
+                  <li>
+                    <a href="#RegisterModel" class="dropdown-item"  data-bs-target="#RegisterModelToggle" data-bs-toggle="modal">Register</a></li>
+                  </li>
+                  <li><a class="dropdown-item" href="login">Forgot Password</a></li>
+                </ul>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+      </nav>              
+    </div>
+
+    <div class="modal fade" id="loginModalToggle" aria-hidden="true" aria-labelledby="loginModalToggleLabel" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="loginModalToggleLabel">Login</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+              <form class="v_form" name="loginForm" id="loginForm">
+                {% csrf_token %}
+                <div class="response"></div>
+                <input type="hidden" id="action" value="login_user"/>
+                <div class="mb-3 mt-20">
+                  <input type="email" name="email" placeholder="Enter Your Email Address*" class="form-control" />
+                </div>
+                <div class="mb-3">
+                  <input type="tel" name="userPass" placeholder="Enter Your Password*" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                  <input type="submit" id="ajax-button" class="btn btn-primary" value="Submit">
+                </div>
+              </form>
+          </div>
+
+          <div class="modal-footer">
+            <!-- <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="RegisterModelToggle" aria-hidden="true" aria-labelledby="RegisterModelToggleLabel" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="RegisterModelToggleLabel">Register</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+           <form class="v_form" name="RegistrationForm" id="RegistrationForm">
+              {% csrf_token %}
+              <div class="response"></div>
+              <input type="hidden" id="action" value="register_user" />
+              <div class="mb-3 mt-20">
+                <input type="text" name="user_name" id="user_name" placeholder="Please Enter Your Name*" class="form-control" />
+              </div>
+                
+              <div class="mb-3 mt-20">
+                <input type="text" name="email" id="email" placeholder="Please Enter Your Email Address*" class="form-control" />
+              </div>
+
+              <div class="mb-3">
+                <input type="tel" name="phone" id="phone" placeholder="Please Enter Your Phone No.*" class="form-control" />
+              </div>
+
+              <div class="mb-3">
+                <input type="submit" id="ajax-button" class="btn btn-primary" value="Submit">
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <!-- <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+    {% comment %} <script src="/static/js/customScript.js"> {% endcomment %}
+  <script>
+    $(document).ready(function () {
+      $("#RegistrationForm").validate({
+        rules: {
+            user_name:{required:true},
+            email: {required: true,email:true},
+            phone:{required:true}
+        },
+        errorPlacement: function(){
+            return false;
+        },
+        invalidHandler: function(event, validator) {($('.response').html('')); }
+      });
+
+      $("#loginForm").validate({
+        rules: {
+            email: {required: true,email:true},
+            userPass:{required:true}
+        },
+        errorPlacement: function(){
+            return false;
+        },
+        invalidHandler: function(event, validator) {($('.response').html('')); }
+      });
+
+      /*function ValidatePhone(input){ 
+        const regex = /^[6-9]\d{9}$/; 
+        return regex.test(input); 
+      }*/
+    });
+
+
+    $(document).on("submit", ".v_form", function (e) {
+      e.preventDefault();
+      var formId=$(this).attr('id'),id=$('#'+formId+' input[name=id]').length > 0 ? $('#'+formId+' input[name=id]').val():'',proceed=false;
+      var btn = $('#'+formId+' button[type=submit]');
+      var btn_text = btn.text();
+
+      if($('#'+formId).valid()){proceed=true;}
+      $('#'+formId+' .response').html(''); 
+      if(proceed){ 
+        btn.text('Please wait...');
+        btn.prop('disabled', true);
+        var frm = $('#'+formId);
+
+        var formData = {
+          name: $("#user_name").val(),
+          email: $("#email").val(),
+          phone: $("#phone").val(),
+        };
+        var formData = frm.serializeArray();
+        var jsonData = {};
+        for(i=1;i<formData.length;i++){
+          jsonData[formData[i]['name']] = formData[i]['value'];
+        }
+        dataa = JSON.stringify(jsonData);
+        var url;
+    if (formId === 'registerForm') {
+        url = "{% url 'lcommerce:register_user' %}";
+    } else if (formId === 'loginForm') {
+        url = "{% url 'lcommerce:sign_up' %}";
+    }
+
+    // Make an AJAX request using the generated URL
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ /* Your data here */ })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+        {% comment %} $.ajax({
+            url:'{% url 'lcommerce:register_user' %}',
+          
+            
+            type:"post",
+            //dataType: 'json',
+            headers: {
+            // Include the CSRF token in the request headers
+            'X-CSRFToken': jQuery("[name=csrfmiddlewaretoken]").val()
+            },
+            encode:true,
+            dataType:'json',
+            data: dataa,
+            success: function (response) { //console.log(typeof response, response);return false;
+                var status,error,redirect,reload,msg,otp;
+                if(response && isObject(response)){ 
+                  status = response.hasOwnProperty("status") ? response.status : '';
+                  error = response.hasOwnProperty("error") ? response.error : '';
+                  msg = response.hasOwnProperty("msg") ? response.msg : '';
+                }
+                if(status === 'OK'){
+                  if(redirect){
+                    location.href= redirect;return false;
+                  }else if(reload){ 
+                    location.reload(true);return false;
+                  }else{ 
+                    $('#'+formId+' .response').html('<div class="alert alert-success"><i class="fa fa-check-circle"></i> '+ msg +'</div>');
+                    if(['clients-form','slider-form','stats-form','settings-form','social-links-form','product-form','aboutus-form','time-form'].includes(formId)){ 
+                      setTimeout(function() {location.reload(true);return false;},5000);
+                    }else{
+                      var resetForms = ['changePasswordForm','enquiry_form'];                        
+                      if(((!id) || resetForms.includes(formId))){
+                        $('#'+formId)[0].reset();
+                        if($('.dropify').length > 0){$(".dropify").each(function() {resetDropify(this);});}
+                        if($('.summernote').length > 0){$('.summernote').summernote('reset');}
+                      }
+                    }
+                  }
+                }else if(error){
+                  $('#'+formId+' .response').html('<div class="alert alert-danger"><i class="fa fa-warning"></i> '+error+'</div>');}  
+                  btn.prop('disabled', false).text(btn_text);
+            },
+            error: function( xhr, textStatus, errorThrown ){ console.log(xhr.status);
+                btn.prop('disabled', false).text(btn_text);
+                xhr.status==401&&$("#myModal").modal('show');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        }); {% endcomment %}
+        {% comment %} $('html, body').animate({scrollTop: $('#'+formId+' .response').offset().top-100}, 1000); {% endcomment %} 
+    }     
+});
+function isObject (value) {return value && typeof value === 'object' && value.constructor === Object;}
+  </script>
+  </body>
+</html>
